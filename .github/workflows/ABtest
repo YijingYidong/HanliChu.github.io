@@ -1,0 +1,16 @@
+1. AB testing应该run多长时间？
+
+简单来讲, AB testing要run多久其实就是问sample size要多大。
+
+Sample size = 16 * variance / difference ^ 2
+
+这里variance就是sample variance。difference就是testing 和control之间的difference，一般sample variance可以从以往的数据里面求出，但是在testing之前difference是不知道的，我们run AB testing就是为了证明这个difference是significant的。一种方法就用minimum detectable effect，一般小于这个的话就是noise，大于的话就可以认为是effect。
+
+2. Novelty and primacy 问题
+
+Novelty and primacy 问题就是，新的feature推出来了，要么大家因为新鲜感都去用了，要么大家都太懒，不愿意改变旧的习惯。典型的问题就是，如果一个新的feature上线了，大家都在用，但是过了一段时间大家都不用了。这个就是Novelty effect。
+如何解决这个问题。一种方法就是在新用户上run experiment。这样就没有feature 新旧问题了。
+
+3. 干扰问题. 
+
+很多实际test中，treatment和control组不是independent的。比如在social network中，一个用户用了新的feature导致行为改变。如果好友在control组的话就会收到影响，在Uber Lyft双边市场也会干扰问题。干扰问题一般用隔离方法解决，就是要么用地理隔离，要么用时间隔离，social network可以用network cluster隔离。
